@@ -31,7 +31,7 @@ export const getParamsFromObj = (params) => {
           return str;
         }, "");
       } else {
-        return `${esc(k)}=${esc(params[k])}`;
+        return `${esc(key)}=${esc(params[key])}`;
       }
     })
     .join("&");
@@ -48,7 +48,7 @@ const axiosRequest = axios.create({
   headers: {
     Device: buildDeviceInfo(),
     Authorization: `Bearer ${getApiToken()}`,
-    LANG: lang,
+    LANG: "vi",
   },
   validateStatus: checkStatus,
   timeout: 3000000,
@@ -62,15 +62,6 @@ axiosRequest.interceptors.request.use((config) => {
 
 axiosRequest.interceptors.response.use(
   (response) => {
-    if (response.status == 200)
-      console.log(
-        `---------------${config.method} -------------- SUCCEED --------------- ${config.url}`
-      );
-    else
-      console.log(
-        `---------------${config.method} -------------- FAILED --------------- ${config.url}`
-      );
-    console.log(response.data);
     return response.data;
   },
   (error) => {
