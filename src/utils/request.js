@@ -16,6 +16,29 @@ const buildDeviceInfo = () => {
   return global.buildDeviceInfo;
 };
 
+export const getParamsFromObj = (params) => {
+  if (!params) {
+    return "";
+  }
+  let esc = encodeURIComponent;
+  let query = Object.keys(params)
+    .map((key) => {
+      if (Array.isArray(params[key])) {
+        return params[key].reduce((str, item, index) => {
+          if (index > 0) str += "&";
+          str += `${key}%5B${index}%5D=${item}`;
+
+          return str;
+        }, "");
+      } else {
+        return `${esc(k)}=${esc(params[k])}`;
+      }
+    })
+    .join("&");
+  if (query) return `&${query}`;
+  return "";
+};
+
 const checkStatus = (status) => {
   return status == 200;
 };
