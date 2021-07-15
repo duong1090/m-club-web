@@ -1,0 +1,66 @@
+.file-manager{
+    margin-left: 10%;
+    margin-right: 10%;
+    box-shadow: #ddd 0px 0px 30px 20px;
+    padding: 30px;
+    height: 1000px;
+    .header{
+        display: flex;
+        padding: 10px;
+        justify-content: space-between;
+        border-bottom: 2px solid;
+        .title{
+            color: mediumaquamarine;
+            font-size: 40px;
+        }
+        .input-side{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .button-upload{
+            background-color: grey;
+            width: 250px;
+            background-color: skyblue;
+            height: 50px;
+        }
+    }
+    .content{
+        padding: 10px;
+        display: flex;
+        width: 100%;
+    }
+    .tree-side{
+        flex: 1;
+        border-right: 2px solid grey;
+    }
+    .content-side{
+        flex: 3;
+        padding: 10px
+    }
+    .footer{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .content-side{
+        padding:30px
+    }
+    .file-name{
+        font-size: 20px;
+        width: 100%;
+        text-overflow: ellipsis; 
+        overflow: hidden; 
+        white-space: nowrap;
+    }
+    .card-file{
+        padding: 15px;
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        box-shadow: lightgray 0px 5px 10px 3px;
+        border-radius: 5px;
+    }
+    
+}
