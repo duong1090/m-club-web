@@ -1,17 +1,14 @@
 import logo from "./logo.svg";
 import "./App.css";
 import "antd/dist/antd.css";
-import Router from "./router";
-import { BrowserRouter } from "react-router-dom";
-import { Suspense } from "react";
+import { RecoilRoot } from "recoil";
+import MainProvider from "./provider";
 
 function App() {
   return (
-    <Suspense fallback={<div>Loading.....</div>}>
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
-    </Suspense>
+    <RecoilRoot>
+      <MainProvider />
+    </RecoilRoot>
   );
 }
 

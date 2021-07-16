@@ -35,7 +35,7 @@ export const getParamsFromObj = (params) => {
       }
     })
     .join("&");
-  if (query) return `&${query}`;
+  if (query) return `?${query}`;
   return "";
 };
 
@@ -44,24 +44,34 @@ const checkStatus = (status) => {
 };
 
 const axiosRequest = axios.create({
-  baseURL: Config,
+  baseURL: Config.API_URL,
   headers: {
     Device: buildDeviceInfo(),
-    Authorization: `Bearer ${getApiToken()}`,
-    LANG: "vi",
+    LANG: "en",
   },
   validateStatus: checkStatus,
   timeout: 3000000,
 });
 
 axiosRequest.interceptors.request.use((config) => {
-  console.log(`---------------${config.method}--------------- ${config.url}`);
-  if (config.method == "POST") console.log("params ------- ", config.data);
+  console.log("headerRequest::::", config.headers);
+
+  console.log(
+    `---------------${config.method ? config.method : ""}--------------- ${
+      config.url
+    }`
+  );
+  if (config.method == "post") console.log("params ------- ", config.data);
   return config;
 });
 
 axiosRequest.interceptors.response.use(
   (response) => {
+    console.log(
+      `---------------${
+        response.config.method ? response.config.method : ""
+      }--------------- ${response.config.url} --------------- SUCCEED`
+    );
     return response.data;
   },
   (error) => {

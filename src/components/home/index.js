@@ -1,8 +1,16 @@
-import React from "react";
-import { CLUB, FILE_MANAGER } from "../../constants/routes";
+import React, { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { CLUB, FILE_MANAGER, SIGN_IN } from "../../constants/routes";
+import { organizationState } from "../../recoil";
 
 const Home = (props) => {
   const { gotoRoute, location } = props;
+
+  const organization = useRecoilValue(organizationState);
+
+  useEffect(() => {
+    console.log("Home:::organization", organization);
+  }, [organization]);
 
   return (
     <div>

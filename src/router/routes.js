@@ -27,4 +27,9 @@ loadableRoutes[routes.FILE_MANAGER] = {
   component: React.lazy(() => import("../components/fileManager")),
 };
 
+loadableRoutes[routes.SIGN_IN] = {
+  defaultProps: {},
+  component: React.lazy(() => import("../components/signIn")),
+};
+
 export default loadableRoutes;

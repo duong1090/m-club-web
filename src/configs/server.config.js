@@ -7,10 +7,10 @@ if (global.env == "production") {
 const Config =
   global.env == "production"
     ? {
-        API_URL: "",
+        API_URL: "http://mclub.ga:8888/api/",
       }
     : {
-        API_URL: "",
+        API_URL: "http://mclub.ga:8888/api/",
       };
 
 export default Config;

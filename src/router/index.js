@@ -36,6 +36,7 @@ const Router = (props) => {
               React.createElement(component, {
                 ...defaultProps,
                 ...newProps,
+                ...newProps.location.state,
                 path,
                 gotoRoute,
                 goBack,
