@@ -30,7 +30,10 @@ const LoadingInitialize = (props) => {
   useEffect(() => {
     if (!organization)
       getOrganization().then((org) => {
-        if (org) setOrganization(org);
+        if (org) {
+          setOrganization(org);
+          global.organization = org;
+        }
       });
   }, []);
 

@@ -1,66 +1,100 @@
-.file-manager{
-    margin-left: 10%;
-    margin-right: 10%;
-    box-shadow: #ddd 0px 0px 30px 20px;
-    padding: 30px;
-    height: 1000px;
-    .header{
-        display: flex;
+.file-manager {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+
+  .side-bar {
+    flex: 1;
+    padding: 20px;
+
+    .ant-tree {
+      overflow-y: scroll;
+
+      .ant-tree-treenode {
         padding: 10px;
-        justify-content: space-between;
-        border-bottom: 2px solid;
-        .title{
-            color: mediumaquamarine;
-            font-size: 40px;
+
+        .ant-tree-switcher {
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
-        .input-side{
+
+        .ant-tree-node-content-wrapper {
+          display: flex;
+
+          .ant-tree-title {
+            margin-left: 10px;
+          }
+
+          .ant-tree-iconEle {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+          }
         }
-        .button-upload{
-            background-color: grey;
-            width: 250px;
-            background-color: skyblue;
-            height: 50px;
+      }
+    }
+  }
+
+  .content {
+    flex: 4;
+    padding: 20px;
+    overflow-y: scroll;
+
+    .file-previewer {
+      padding: 20px;
+
+      .img-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f1f1f1;
+
+        img {
+          width: 100px;
+          padding-top: 20px;
+          padding-bottom: 20px;
         }
-    }
-    .content{
-        padding: 10px;
-        display: flex;
-        width: 100%;
-    }
-    .tree-side{
-        flex: 1;
-        border-right: 2px solid grey;
-    }
-    .content-side{
-        flex: 3;
-        padding: 10px
-    }
-    .footer{
-        display: flex;
-        justify-content: flex-end;
-    }
-    .content-side{
-        padding:30px
-    }
-    .file-name{
-        font-size: 20px;
-        width: 100%;
-        text-overflow: ellipsis; 
-        overflow: hidden; 
-        white-space: nowrap;
-    }
-    .card-file{
-        padding: 15px;
-        height: 120px;
+      }
+
+      .content-wrapper {
+        padding: 20px;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: lightgray 0px 5px 10px 3px;
-        border-radius: 5px;
+
+        h6 {
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        .download-btn {
+          margin-top: 20px;
+        }
+      }
     }
-    
+  }
+
+  .upload-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      font-size: 25px;
+    }
+  }
+}
+
+.upload-modal {
+  padding: 20px;
 }

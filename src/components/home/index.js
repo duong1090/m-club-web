@@ -9,18 +9,10 @@ const Home = (props) => {
   const organization = useRecoilValue(organizationState);
 
   useEffect(() => {
-    console.log("Home:::organization", organization);
-  }, [organization]);
+    gotoRoute(FILE_MANAGER);
+  }, []);
 
-  return (
-    <div>
-      <p>This is Home</p>
-      <a onClick={() => gotoRoute(CLUB, { testProps: true })}>Go to Club</a>
-      <a onClick={() => gotoRoute(FILE_MANAGER, { testProps: true })}>
-        Go to File Manager
-      </a>
-    </div>
-  );
+  return <div></div>;
 };
 
 export default Home;

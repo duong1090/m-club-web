@@ -89,6 +89,7 @@ const SignIn = (props) => {
         if (organization) {
           console.log("onLogin:::", organization);
           setOrganization(organization);
+          global.organization = organization;
           setIsLoggedIn(true);
         }
       })

@@ -1,0 +1,9 @@
+export const EXCEL_TYPE = "excel";
+export const COMPRESSED_TYPE = "zip";
+export const POWERPOINT_TYPE = "powerpoint";
+export const WORD_TYPE = "word";
+export const TEXT_TYPE = "txt";
+export const VIDEO_TYPE = "video";
+export const IMAGE_TYPE = "image";
+export const FOLDER_TYPE = "folder";
+export const OTHER_TYPE = "other";
