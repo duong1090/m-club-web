@@ -1,0 +1,22 @@
+.avatar-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border-width: 1px;
+  border-color: #ddd;
+  border-style: solid;
+
+  p {
+    color: white;
+    margin-bottom: 0;
+    margin-left: 2px;
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+  }
+}

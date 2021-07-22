@@ -1,0 +1,33 @@
+.info-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #f1f1f1;
+  padding: 5px 20px 5px 5px;
+  border-radius: 50px;
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+
+    #member-name {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    #club-name {
+      margin-bottom: 0;
+      font-size: 10px;
+      color: grey;
+    }
+  }
+}
+
+.menu {
+  border-radius: 40px;
+  padding: 5px;
+
+  .menu-item {
+    border-radius: 40px;
+  }
+}

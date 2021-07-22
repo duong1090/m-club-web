@@ -1,0 +1,22 @@
+//DEFAULT STYLE COMPONENT --------------------------------------------------------------------------------------------------------------------------------------------
+.ant-message-notice-content {
+  border-radius: var(--border-radius-default);
+  padding: 10px 20px 10px 20px;
+
+  .ant-message-custom-content {
+    display: flex;
+    align-items: center;
+
+    .anticon {
+      margin-bottom: 2px;
+    }
+  }
+}
+
+.ant-modal-content {
+  border-radius: var(--border-radius-default);
+}
+
+.ant-btn {
+  border-radius: var(--border-radius-default);
+}

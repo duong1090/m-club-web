@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
+import GlobalContext from "../context";
 import loadableRoutes from "./routes";
 
 const Router = (props) => {
+  //context
+  const globalContext = useContext(GlobalContext);
+
+  //hooks ------------------------------------------------------------------------------------------
   const browserHistory = useHistory();
 
+  useEffect(() => {
+    globalContext &&
+      globalContext.set &&
+      globalContext.set({ ...globalContext.current, gotoRoute, goBack });
+  }, []);
+
+  //functions --------------------------------------------------------------------------------------
   const gotoRoute = (path, passProps = {}, type = "replace") => {
     console.log("gotoRoute::::", browserHistory);
 
@@ -20,6 +32,7 @@ const Router = (props) => {
     browserHistory.goBack();
   };
 
+  //render ----------------------------------------------------------------------------------------
   return (
     <Switch>
       {Object.keys(loadableRoutes).map((path) => {

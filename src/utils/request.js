@@ -40,7 +40,7 @@ export const getParamsFromObj = (params) => {
 };
 
 const checkStatus = (status) => {
-  return status == 200;
+  return status == 200 || status == 400;
 };
 
 const axiosRequest = axios.create({
@@ -52,32 +52,5 @@ const axiosRequest = axios.create({
   validateStatus: checkStatus,
   timeout: 3000000,
 });
-
-axiosRequest.interceptors.request.use((config) => {
-  console.log("headerRequest::::", config.headers);
-
-  console.log(
-    `---------------${config.method ? config.method : ""}--------------- ${
-      config.url
-    }`
-  );
-  if (config.method == "post") console.log("params ------- ", config.data);
-  return config;
-});
-
-axiosRequest.interceptors.response.use(
-  (response) => {
-    console.log(
-      `---------------${
-        response.config.method ? response.config.method : ""
-      }--------------- ${response.config.url} --------------- SUCCEED`
-    );
-    return response.data;
-  },
-  (error) => {
-    Promise.reject(error);
-    console.error(error);
-  }
-);
 
 export default axiosRequest;

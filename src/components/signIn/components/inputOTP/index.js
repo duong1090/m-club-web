@@ -1,12 +1,11 @@
 import React, {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useRef,
   useState,
 } from "react";
 import { CloseOutlined } from "@ant-design/icons";
-import { Button, Divider, Input, notification } from "antd";
+import { Button, Divider, Input, message } from "antd";
 import {
   confirmOTP,
   getIdToken,
@@ -25,6 +24,8 @@ const InputOTP = (props, ref) => {
   const [visible, setVisible] = useState(false);
   const [otp, setOTP] = useState(null);
   const [countdown, setCountdown] = useState(DEFAULT_COUNTDOWN);
+  const [loadingOTP, setLoadingOTP] = useState(false);
+  const [loadingVerify, setLoadingVerify] = useState(false);
 
   //recoil
   const [certificate, setCertificate] = useRecoilState(certificateState);
@@ -52,6 +53,7 @@ const InputOTP = (props, ref) => {
 
   const verifyCode = () => {
     console.log("verifyCode::::", certificate);
+    setLoadingVerify(true);
     confirmOTP(otp)
       .then((res) => {
         if (res) {
@@ -60,30 +62,43 @@ const InputOTP = (props, ref) => {
           getIdToken()
             .then((token) => {
               setCertificate({ ...certificate, token, step: "login" });
+              setLoadingVerify(false);
             })
-            .catch((err) => onError(err));
+            .catch((err) => {
+              setLoadingVerify(false);
+              onError(err);
+            });
         }
       })
-      .catch((err) => onError(err));
+      .catch((err) => {
+        setLoadingVerify(false);
+        onError(err);
+      });
   };
 
   const resendOTP = () => {
     const { phone } = certificate;
-    if (phone)
-      signInWithPhoneNumber(phone)
-        .then((res) => {})
-        .catch((err) => onError(err));
+    console.log("resendOTP:::", certificate, phone);
+
+    if (phone) {
+      loadingOTP(true);
+      signInWithPhoneNumber({ phone })
+        .then((res) => {
+          setLoadingOTP(false);
+        })
+        .catch((err) => {
+          setLoadingOTP(false);
+          onError(err);
+        });
+    }
   };
 
   const onError = (err) => {
     console.log(err);
 
-    const message = err.message || err;
+    const mes = err.message || err;
 
-    notification["error"]({
-      message: "Error",
-      description: message,
-    });
+    message.error(mes);
   };
 
   const doCountDown = () => {
@@ -118,6 +133,7 @@ const InputOTP = (props, ref) => {
         <Button
           type="primary"
           className="verify-btn"
+          loading={loadingVerify}
           onClick={() => verifyCode()}
         >
           Verify
@@ -129,6 +145,7 @@ const InputOTP = (props, ref) => {
           disabled={countdown > 0}
           type="dashed"
           className="resend-btn"
+          loading={loadingOTP}
           onClick={() => resendOTP()}
         >
           <span>Resend</span>

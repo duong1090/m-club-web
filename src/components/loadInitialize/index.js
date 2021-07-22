@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import Lottie from "react-lottie";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { getOrganization } from "../../actions/user";
 import logo from "../../assets/image/Mclub-bgrLogo.png";
 import loadingGif from "../../assets/lottie/splash.json";
@@ -13,7 +13,7 @@ const DELAY_TIMEOUT = 1500;
 
 const LoadingInitialize = (props) => {
   //recoil
-  const setIsLoggedInState = useSetRecoilState(isLoggedInState);
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
   const [organization, setOrganization] = useRecoilState(organizationState);
 
   //variables
@@ -28,7 +28,7 @@ const LoadingInitialize = (props) => {
   });
 
   useEffect(() => {
-    if (!organization)
+    if (!organization && isLoggedIn)
       getOrganization().then((org) => {
         if (org) {
           setOrganization(org);
@@ -38,6 +38,7 @@ const LoadingInitialize = (props) => {
   }, []);
 
   //functions ---------------------------------------------------------------------------------------------
+
   const checkToken = () => {
     const token = localStorage.getItem(API_TOKEN);
 
@@ -45,8 +46,8 @@ const LoadingInitialize = (props) => {
 
     setTimeout(() => {
       console.log("LoadingInitialize:::token", token);
-      if (token) setIsLoggedInState(true);
-      else setIsLoggedInState(false);
+      if (token) setIsLoggedIn(true);
+      else setIsLoggedIn(false);
     }, DELAY_TIMEOUT);
   };
 

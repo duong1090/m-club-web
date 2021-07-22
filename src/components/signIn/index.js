@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Button, Form, Input, notification } from "antd";
+import { Button, Form, Input, message } from "antd";
 import "./styles.scss";
 import { doLogin, preValidateLogin } from "../../actions/user";
 import { useRecoilState, useSetRecoilState } from "recoil";
@@ -91,6 +91,7 @@ const SignIn = (props) => {
           setOrganization(organization);
           global.organization = organization;
           setIsLoggedIn(true);
+          setCertificate({ ...certificate, step: null });
         }
       })
       .catch((err) => onError(err));
@@ -99,12 +100,9 @@ const SignIn = (props) => {
   const onError = (err) => {
     console.log(err);
 
-    const message = err.message || err;
+    const mes = err.message || err;
 
-    notification["error"]({
-      message: "Error",
-      description: message,
-    });
+    message.error(mes);
   };
 
   //render ------------------------------------------------------------------------------------------------------------------------

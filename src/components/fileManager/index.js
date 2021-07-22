@@ -1,9 +1,8 @@
 import "./style.scss";
-import { CLUB } from "../../constants/routes";
 import React, { useState, useEffect, useRef } from "react";
 import axiosRequest from "../../utils/request";
 
-import { Tree, Progress, Tooltip, Divider } from "antd";
+import { Tree, Progress, Divider } from "antd";
 import Config from "../../configs/server.config";
 import { useRecoilValue } from "recoil";
 import { organizationState } from "../../recoil";
@@ -11,6 +10,7 @@ import { getFileType } from "./utils";
 import { UploadOutlined } from "@ant-design/icons";
 import UploadModal from "./components/upload";
 import { IMAGE_TYPE } from "./constants";
+import InfoBox from "../ui/infoBox";
 
 const { DirectoryTree } = Tree;
 const FileManager = (props) => {
@@ -157,7 +157,9 @@ const FileManager = (props) => {
         </div>
         <Divider />
         <DirectoryTree
-          style={{ fontSize: 16 }}
+          style={{
+            fontSize: 16,
+          }}
           multiple
           defaultExpandAll
           onSelect={onSelect}
@@ -174,12 +176,9 @@ const FileManager = (props) => {
 
     return (
       <div className="col-3 mb-3">
-        <a className="card" onClick={() => onSelect([item.key])}>
+        <a className="card file-card shadow" onClick={() => onSelect([item.key])}>
           {type == IMAGE_TYPE ? (
-            <img
-              src={Config.API_IMAGE(item.key)}
-              style={{ width: 380, height: 140, objectFit: "cover" }}
-            />
+            <img className="img-direct" src={Config.API_IMAGE(item.key)} />
           ) : (
             <div className="img-wrapper">
               <img src={image} />
@@ -201,9 +200,18 @@ const FileManager = (props) => {
     );
   };
 
+  const renderInfoBox = () => {
+    return (
+      <div className="d-flex justify-content-end mb-2">
+        <InfoBox />
+      </div>
+    );
+  };
+
   const renderContent = () => {
     return (
       <div className="content">
+        {renderInfoBox()}
         {visibleProgress ? (
           <Progress percent={curPercent} size="small" status="active" />
         ) : (
